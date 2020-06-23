@@ -1,14 +1,55 @@
 {
 	"pages": [{
-		"path": "pages/index/index",
+		"path": "pages/index",
 		"style": {
-			"navigationBarTitleText": "uni-ui基础项目"
+			"transparentTitle": "auto"
 		}
+	}, {
+		"path": "pages/messages",
+		"style": {}
+	}, {
+		"path": "pages/dynamic",
+		"style": {}
+	}, {
+		"path": "pages/about",
+		"style": {}
 	}],
+	"tabBar": {
+		"color": "#fff",
+		"selectedColor": "#f37b1d",
+		"backgroundColor": "#191919",
+		"borderStyle": "black",
+		"blurEffect": "light",
+		"spacing":"1px",
+		"list": [{
+				"pagePath": "pages/index",
+				"text": "首页"
+				// "iconPath": "static/home.svg",
+				// "selectedIconPath": "static/home_selected.svg"
+			},
+			{
+				"pagePath": "pages/dynamic",
+				"text": "动态"
+				// "iconPath": "static/home.svg",
+				// "selectedIconPath": "static/home_selected.svg"
+			},
+			{
+				"pagePath": "pages/messages",
+				"text": "消息"
+				// "iconPath": "static/home.svg",
+				// "selectedIconPath": "static/home_selected.svg"
+			},
+			{
+				"pagePath": "pages/about",
+				"text": "我的"
+				// "iconPath": "static/home.svg",
+				// "selectedIconPath": "static/home_selected.svg"
+			}
+		]
+	},
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
-		"navigationBarTitleText": "uni-app",
-		"navigationBarBackgroundColor": "#007AFF",
+		"navigationBarBackgroundColor": "#191919",
 		"backgroundColor": "#FFFFFF"
 	}
 }
