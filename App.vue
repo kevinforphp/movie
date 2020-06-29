@@ -17,15 +17,17 @@
 	@import "colorui/main.css";
 	@import "colorui/icon.css";
 	@import "colorui/animation.css";
+
 	/* 解决头条小程序组件内引入字体不生效的问题 */
 	/* #ifdef MP-TOUTIAO */
 	@font-face {
 		font-family: uniicons;
 		src: url('/static/uni.ttf');
 	}
+
 	/* #endif */
-	page{
-		background-color: #2d2d2d;
+	page {
+		background-color: #000;
 		color: #fff;
 	}
 </style>

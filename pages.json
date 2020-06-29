@@ -5,14 +5,38 @@
 			"transparentTitle": "auto"
 		}
 	}, {
-		"path": "pages/messages",
-		"style": {}
+		"path": "pages/messages/list",
+		"style": {
+			"navigationBarTitleText": "聊天"
+		}
 	}, {
 		"path": "pages/dynamic",
-		"style": {}
+		"style": {
+			"navigationBarTitleText": "广场"
+		}
 	}, {
 		"path": "pages/about",
 		"style": {}
+	}, {
+		"path": "pages/Concerned",
+		"style": {
+			"navigationBarTitleText": "关注"
+		}
+	}, {
+		"path": "pages/messages/add",
+		"style": {
+			"navigationBarTitleText": "选择一位主播互动",
+			"app-plus": {
+				"titleNView": {
+					"buttons": [{
+						"text": "全部",
+						"fontSize": "14",
+						"select": true,
+						"width": "auto"
+					}]
+				}
+			}
+		}
 	}],
 	"tabBar": {
 		"color": "#fff",
@@ -20,7 +44,7 @@
 		"backgroundColor": "#191919",
 		"borderStyle": "black",
 		"blurEffect": "light",
-		"spacing":"1px",
+		"spacing": "1px",
 		"list": [{
 				"pagePath": "pages/index",
 				"text": "首页"
@@ -28,14 +52,20 @@
 				// "selectedIconPath": "static/home_selected.svg"
 			},
 			{
-				"pagePath": "pages/dynamic",
-				"text": "动态"
+				"pagePath": "pages/Concerned",
+				"text": "关注"
 				// "iconPath": "static/home.svg",
 				// "selectedIconPath": "static/home_selected.svg"
 			},
 			{
-				"pagePath": "pages/messages",
-				"text": "消息"
+				"pagePath": "pages/dynamic",
+				"text": "广场"
+				// "iconPath": "static/home.svg",
+				// "selectedIconPath": "static/home_selected.svg"
+			},
+			{
+				"pagePath": "pages/messages/list",
+				"text": "聊天"
 				// "iconPath": "static/home.svg",
 				// "selectedIconPath": "static/home_selected.svg"
 			},

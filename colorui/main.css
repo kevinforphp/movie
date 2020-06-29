@@ -522,51 +522,51 @@ radio.white.checked .uni-radio-input {
 }
 
 .solid::after {
-	border: 1upx solid rgba(0, 0, 0, 0.1);
+	border: 1upx solid rgba(0, 0, 0, 0.5);
 }
 
 .solid-top::after {
-	border-top: 1upx solid rgba(0, 0, 0, 0.1);
+	border-top: 1upx solid rgba(0, 0, 0, 0.5);
 }
 
 .solid-right::after {
-	border-right: 1upx solid rgba(0, 0, 0, 0.1);
+	border-right: 1upx solid rgba(0, 0, 0, 0.5);
 }
 
 .solid-bottom::after {
-	border-bottom: 1upx solid rgba(0, 0, 0, 0.3);
+	border-bottom: 1upx solid rgba(0, 0, 0, 0.5);
 }
 
 .solid-bottom-xl {
-	border-bottom: 3upx solid rgba(0, 0, 0, 0.1);
+	border-bottom: 3upx solid rgba(0, 0, 0, 0.5);
 }
 
 .solid-left::after {
-	border-left: 1upx solid rgba(0, 0, 0, 0.1);
+	border-left: 1upx solid rgba(0, 0, 0, 0.5);
 }
 
 .solids::after {
-	border: 8upx solid #eee;
+	border: 8upx solid #000;
 }
 
 .solids-top-sm::after {
-	border-top: 4upx solid #eee;
+	border-top: 4upx solid #000;
 }
 
 .solids-top::after {
-	border-top: 8upx solid #eee;
+	border-top: 8upx solid #000;
 }
 
 .solids-right::after {
-	border-right: 8upx solid #eee;
+	border-right: 8upx solid #000;
 }
 
 .solids-bottom::after {
-	border-bottom: 8upx solid #eee;
+	border-bottom: 8upx solid #000;
 }
 
 .solids-left::after {
-	border-left: 8upx solid #eee;
+	border-left: 8upx solid #000;
 }
 
 /* -- 虚线 -- */
@@ -977,6 +977,12 @@ button.cuIcon.lg {
 	width: 170upx;
 	height: 170upx;
 	font-size: 2.5em;
+}
+
+.cu-avatar.xxxl {
+	width: 200upx;
+	height: 200upx;
+	font-size: 3.5em;
 }
 
 .cu-avatar .avatar-text {
@@ -3621,7 +3627,7 @@ scroll-view.cu-steps .cu-item {
 }
 
 .bg-black {
-	background-color: #333333;
+	background-color: #191919;
 	color: #ffffff;
 }
 
