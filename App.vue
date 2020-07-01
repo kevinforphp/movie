@@ -1,5 +1,9 @@
 <script>
+	import Vue from 'vue'
 	export default {
+		globalData: {
+			NavFlag: false, //跳转标记
+		},
 		onLaunch: function() {
 
 		},

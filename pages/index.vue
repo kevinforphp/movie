@@ -51,7 +51,7 @@
 			<view class="video-list bg-black padding-top-sm padding-bottom">
 				<scroll-view scroll-x @scroll="scroll" style="height: 420upx" class="scroll-view-H">
 					<view class="video-item margin-left-sm my-shaodw" v-for="i in 10">
-						<video src="https://asia.messages.swag.live/5eda576523cc2facaba201b6/trailer.mp4" muted :show-play-btn="false"
+						<video src="" muted :show-play-btn="false"
 						 :controls="false" object-fit="fill"></video>
 						<view class="detail flex padding-lr-sm align-center">
 							<view class="cu-avatar lg round" style="background-image: url('https://ossweb-img.qq.com/images/lol/web201310/skin/big25002.jpg');">
@@ -135,7 +135,7 @@
 				swiperList: [{
 					id: 0,
 					type: 'video',
-					url: 'https://asia.messages.swag.live/5eda576523cc2facaba201b6/trailer.mp4'
+					url: 'https://us8.wl-cdn.com/hls/20200622/760dc6451d0be12b5b9bbc7c04be27d8/index.m3u8'
 				}, {
 					id: 1,
 					type: 'image',
@@ -169,7 +169,6 @@
 		methods: {
 			// cardSwiper
 			cardSwiper(e) {
-				console.log(e)
 				this.cardCur = e.detail.current
 			},
 			scroll() {

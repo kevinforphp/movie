@@ -37,7 +37,13 @@
 				}
 			}
 		}
-	}],
+	}    ,{
+            "path" : "pages/messages/chat",
+            "style": {
+            	"navigationBarTitleText": "@"
+            }
+        }
+    ],
 	"tabBar": {
 		"color": "#fff",
 		"selectedColor": "#f37b1d",

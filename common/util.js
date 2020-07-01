@@ -91,10 +91,43 @@ var dateUtils = {
 		return new Date(a[0], a[1] - 1, a[2], a[3], a[4], a[5]);
 	}
 };
-
+// 功能函数
+var tools = {
+	goBack: function() {
+		//#ifdef H5
+		window.history.go(-1)
+		//#endif
+		//#ifdef APP-PLUS
+		uni.navigateBack({
+			delta: 1
+		});
+		//#endif
+	},
+	navTo: function(url) { //路由跳转
+		if (getApp().globalData.NavFlag) {
+			return
+		}
+		getApp().globalData.NavFlag = true
+		uni.navigateTo({
+			url: url,
+			complete: () => {
+				getApp().globalData.NavFlag = false
+			}
+		})
+	},
+	openUrl: function(url) { //新开网页
+		//#ifdef APP-PLUS
+		plus.runtime.openURL(url)
+		//#endif
+		//#ifdef H5
+		window.open(url, '_blank')
+		//#endif
+	}
+}
 module.exports = {
-	formatTime: formatTime,
-	formatLocation: formatLocation,
-	dateUtils: dateUtils,
-	numberComma: numberComma
+	formatTime,
+	formatLocation,
+	dateUtils,
+	numberComma,
+	tools
 }

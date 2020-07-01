@@ -1,7 +1,7 @@
 <template>
-	<view>
+	<view >
 		<view class="grid col-3 padding-lr-sm margin-top-sm">
-			<view class="flex flex-direction align-center" v-for="i in 100">
+			<view class="flex flex-direction align-center" @tap="navTo('/pages/messages/chat')" v-for="i in 100">
 				<view class="cu-avatar round xxxl" style="background-image: url(https://api.swag.live/users/5c7b62ed1817b7bd43cca413/avatar.128x128.jpg);">
 				</view>
 				<view style="line-height: 40upx; width: 100%;" class="text-center">

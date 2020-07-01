@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<view class="add-btn text-center margin-tb">
-			<button class="cu-btn lines-orange sm">新增聊天</button>
+			<button class="cu-btn lines-orange sm" @tap="navTo('/pages/messages/add')">新增聊天</button>
 		</view>
 		<view class="messages">
 			<view class="cu-list menu-avatar">
@@ -50,6 +50,9 @@
 			return {
 
 			};
+		},
+		onLoad() {
+			console.log(this.navTo)
 		}
 	}
 </script>
