@@ -30,7 +30,7 @@
 
 	/* #endif */
 	page {
-		background-color: #000;
+		background-color: #242A37;
 		color: #fff;
 	}
 </style>
