@@ -5,7 +5,15 @@
 			NavFlag: false, //跳转标记
 		},
 		onLaunch: function() {
-
+			uni.getSystemInfo({
+				success: function(e) {
+					// #ifndef MP
+					console.log('sprots')
+					Vue.prototype.StatusBar = e.statusBarHeight;
+					Vue.prototype.CustomBar = e.statusBarHeight + 44;
+					// #endif
+				}
+			})
 		},
 		onShow: function() {
 			console.log('App Show');
@@ -17,9 +25,16 @@
 </script>
 
 <style>
+	/* #ifndef APP-NVUE */
 	/*每个页面公共css */
 	@import "colorui/main.css";
 	@import "colorui/icon.css";
+
+	page {
+		background-color: #242A37;
+		color: #fff;
+	}
+	/* #endif */
 
 	/* 解决头条小程序组件内引入字体不生效的问题 */
 	/* #ifdef MP-TOUTIAO */
@@ -29,8 +44,4 @@
 	}
 
 	/* #endif */
-	page {
-		background-color: #242A37;
-		color: #fff;
-	}
 </style>

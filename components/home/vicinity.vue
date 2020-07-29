@@ -1,0 +1,20 @@
+<template>
+	<view>
+		<!-- 附近 -->
+		附近
+	</view>
+</template>
+
+<script>
+	export default {
+		data() {
+			return {
+				
+			};
+		}
+	}
+</script>
+
+<style lang="scss">
+
+</style>

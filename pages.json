@@ -1,29 +1,28 @@
 {
 	"pages": [{
-		"path": "pages/index",
+		"path": "pages/home/index",
 		"style": {
-			"transparentTitle": "auto"
+			"navigationStyle": "custom"//取消导航栏
 		}
 	}, {
-		"path": "pages/messages/list",
+		"path": "pages/discover/index",
 		"style": {
-			"navigationBarTitleText": "聊天"
+			"navigationBarTitleText": "发现"
 		}
 	}, {
-		"path": "pages/dynamic",
+		"path": "pages/list/index",
 		"style": {
-			"navigationBarTitleText": "广场"
+			"navigationBarTitleText": "列表"
 		}
 	}, {
-		"path": "pages/about",
+		"path": "pages/messages/index",
 		"style": {
-			"transparentTitle": "auto",
-			"navigationBarTitleText":"我的"
+			"navigationBarTitleText": "消息"
 		}
 	}, {
-		"path": "pages/Concerned",
+		"path": "pages/about/index",
 		"style": {
-			"navigationBarTitleText": "关注"
+			"navigationBarTitleText": "我的"
 		}
 	}, {
 		"path": "pages/messages/add",
@@ -45,46 +44,40 @@
 		"style": {
 			"navigationBarTitleText": "@"
 		}
-	}    ,{
-            "path" : "pages/publish",
-            "style": {
-            	"navigationBarTitleText": "发布"
-            }
-        }
-    ],
+	}],
 	"tabBar": {
 		"color": "#4E586E",
 		"selectedColor": "#fff",
 		"backgroundColor": "#303849",
-		"borderStyle":"black",
+		"borderStyle": "black",
 		"blurEffect": "light",
 		"spacing": "1px",
 		"list": [{
-				"pagePath": "pages/index",
+				"pagePath": "pages/home/index",
 				"text": "首页"
 				// "iconPath": "static/home.svg",
 				// "selectedIconPath": "static/home_selected.svg"
 			},
 			{
-				"pagePath": "pages/Concerned",
-				"text": "关注"
+				"pagePath": "pages/discover/index",
+				"text": "发现"
 				// "iconPath": "static/home.svg",
 				// "selectedIconPath": "static/home_selected.svg"
 			},
 			{
-				"pagePath": "pages/dynamic",
-				"text": "广场"
+				"pagePath": "pages/list/index",
+				"text": "列表"
 				// "iconPath": "static/home.svg",
 				// "selectedIconPath": "static/home_selected.svg"
 			},
 			{
-				"pagePath": "pages/messages/list",
-				"text": "聊天"
+				"pagePath": "pages/messages/index",
+				"text": "消息"
 				// "iconPath": "static/home.svg",
 				// "selectedIconPath": "static/home_selected.svg"
 			},
 			{
-				"pagePath": "pages/about",
+				"pagePath": "pages/about/index",
 				"text": "我的"
 				// "iconPath": "static/home.svg",
 				// "selectedIconPath": "static/home_selected.svg"
@@ -94,6 +87,12 @@
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
 		"navigationBarBackgroundColor": "#191919",
-		"backgroundColor": "#FFFFFF"
+		"backgroundColor": "#FFFFFF",
+		"app-plus": {//下拉刷新样式
+			"pullToRefresh": {
+				"color": "#007AFF",
+				"style": "circle"
+			}
+		}
 	}
 }

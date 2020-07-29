@@ -25,7 +25,7 @@
 						</view>
 					</view>
 					<view class="margin-top-xs text-xl text-orange" style="line-height: 40upx;">
-						<img src="../static/diamond.svg" alt="" style="width: 28upx;height: 28upx;vertical-align: middle;">
+						<img src="../../static/diamond.svg" alt="" style="width: 28upx;height: 28upx;vertical-align: middle;">
 						<text>10,000,000,000,000</text>
 					</view>
 				</view>
