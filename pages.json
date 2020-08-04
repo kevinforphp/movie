@@ -2,17 +2,18 @@
 	"pages": [{
 		"path": "pages/home/index",
 		"style": {
-			"navigationStyle": "custom"//取消导航栏
+			"navigationStyle": "custom" //取消导航栏
+		}
+	},{
+		"path": "pages/home/search",
+		"style": {
+			"navigationStyle": "custom" //取消导航栏
 		}
 	}, {
 		"path": "pages/discover/index",
 		"style": {
-			"navigationBarTitleText": "发现"
-		}
-	}, {
-		"path": "pages/list/index",
-		"style": {
-			"navigationBarTitleText": "列表"
+			"navigationBarTitleText": "发现",
+			"navigationBarBackgroundColor": "#242A37"
 		}
 	}, {
 		"path": "pages/messages/index",
@@ -23,21 +24,6 @@
 		"path": "pages/about/index",
 		"style": {
 			"navigationBarTitleText": "我的"
-		}
-	}, {
-		"path": "pages/messages/add",
-		"style": {
-			"navigationBarTitleText": "选择一位主播互动",
-			"app-plus": {
-				"titleNView": {
-					"buttons": [{
-						"text": "全部",
-						"fontSize": "14",
-						"select": true,
-						"width": "auto"
-					}]
-				}
-			}
 		}
 	}, {
 		"path": "pages/messages/chat",
@@ -65,12 +51,6 @@
 				// "selectedIconPath": "static/home_selected.svg"
 			},
 			{
-				"pagePath": "pages/list/index",
-				"text": "列表"
-				// "iconPath": "static/home.svg",
-				// "selectedIconPath": "static/home_selected.svg"
-			},
-			{
 				"pagePath": "pages/messages/index",
 				"text": "消息"
 				// "iconPath": "static/home.svg",
@@ -88,7 +68,7 @@
 		"navigationBarTextStyle": "white",
 		"navigationBarBackgroundColor": "#191919",
 		"backgroundColor": "#FFFFFF",
-		"app-plus": {//下拉刷新样式
+		"app-plus": { //下拉刷新样式
 			"pullToRefresh": {
 				"color": "#007AFF",
 				"style": "circle"

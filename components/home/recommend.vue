@@ -4,7 +4,7 @@
 		<view class="cu-bar search xl">
 			<view class="search-form round">
 				<text class="cuIcon-search" style="font-size: 32upx"></text>
-				<input type="text" placeholder="输入搜索的关键词" confirm-type="search"></input>
+				<input disabled type="text" @tap="navTo('search')" placeholder="输入搜索的关键词" confirm-type="search"></input>
 			</view>
 		</view>
 		<!-- links -->
@@ -19,8 +19,8 @@
 		</view>
 		<!-- 轮播 -->
 		<view class="swiper-box margin-lr">
-			<swiper class="screen-swiper square-dot"  :indicator-dots="true" :circular="true"
-			 :autoplay="true" interval="5000" duration="500" style="height: 280upx;">
+			<swiper class="screen-swiper square-dot" :indicator-dots="true" :circular="true" :autoplay="true" interval="5000"
+			 duration="500" style="height: 280upx;">
 				<swiper-item v-for="(item,index) in swiperList" :key="index">
 					<image :src="item.url" mode="aspectFill" v-if="item.type=='image'"></image>
 					<video :src="item.url" autoplay loop muted :show-play-btn="false" :controls="false" objectFit="cover" v-if="item.type=='video'"></video>
@@ -37,15 +37,63 @@
 			</view>
 		</view>
 		<view class="padding-lr-sm videos flex flex-wrap">
-			<view class="video-item radius " v-for="i in 10">
-				
+			<videoItem class="margin-left-xs margin-top-xs" v-for="i in 4" :icon="[66,66]" :time="60000"></videoItem>
+		</view>
+		<!-- 轮播 -->
+		<view class="cu-bar">
+			<view class="action">
+				<text>热门解锁</text>
 			</view>
+			<view class="action">
+				<view class="cu-tag radius sm bg-yellow">更多</view>
+			</view>
+		</view>
+		<view class="swiper-box margin-lr">
+			<swiper class="screen-swiper square-dot" :indicator-dots="true" :circular="true" :autoplay="true" interval="5000"
+			 duration="500" style="height: 280upx;">
+				<swiper-item v-for="(item,index) in swiperList" :key="index">
+					<image :src="item.url" mode="aspectFill" v-if="item.type=='image'"></image>
+					<video :src="item.url" autoplay loop muted :show-play-btn="false" :controls="false" objectFit="cover" v-if="item.type=='video'"></video>
+				</swiper-item>
+			</swiper>
+		</view>
+		<!-- 官方精选 -->
+		<view class="cu-bar">
+			<view class="action">
+				<text>官方精选</text>
+			</view>
+			<view class="action">
+				<view class="cu-tag radius sm bg-yellow">更多</view>
+			</view>
+		</view>
+		<view class="padding-lr-sm">
+			<scroll-view class="scroll-view_H videos" scroll-x="true" style="height: 330upx">
+				<videoItem class="margin-left-xs" style="display: inline-block;" v-for="i in 4" :icon="[66,66]" :time="60000"></videoItem>
+			</scroll-view>
+		</view>
+		<!-- 新近主播 -->
+		<view class="cu-bar">
+			<view class="action">
+				<text>新晋主播</text>
+			</view>
+			<view class="action">
+				<view class="cu-tag radius sm bg-yellow">更多</view>
+			</view>
+		</view>
+		<view class="padding-lr-sm">
+			<scroll-view class="scroll-view_H anchors" scroll-x="true" style="height: 420upx">
+				<videoItem class="anchor-item radius margin-left-xs" style="display: inline-block;" v-for="i in 4"></videoItem>
+			</scroll-view>
 		</view>
 	</view>
 </template>
 
 <script>
+	import videoItem from "@/components/home/video-block.vue"
 	export default {
+		components: {
+			videoItem
+		},
 		data() {
 			return {
 				swiperList: [{
@@ -83,26 +131,37 @@
 </script>
 
 <style lang="scss" scoped>
-	.screen-swiper{
+	.screen-swiper {
 		min-height: unset;
 	}
-	.swiper-box{
+
+	.swiper-box {
 		border-radius: 10upx;
 		overflow: hidden;
 	}
+
 	.search-form {
 		background: #313642;
 		color: #aaaaaa;
 		line-height: 80upx;
 		height: 80upx;
 	}
-	.videos{
-		.video-item{
-			width: calc((100% - 20upx)/2);
-			margin-left: 10upx;
-			height: 330upx;
-			background-color: #303849;
-			margin-top: 10upx;
+
+	.scroll-view_H {
+		white-space: nowrap;
+		width: 100%;
+	}
+
+	.anchors {
+		.anchor-item {
+			width: calc((100% - 45upx)/3);
+			height: 420upx;
+			.detail {
+				height: 90upx;
+			}
+			.img {
+				height: 330upx;
+			}
 		}
 	}
 </style>
