@@ -1,74 +1,117 @@
 <template>
 	<view>
-		<view class="bg-img flex align-center" style="background-image: url('https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg');height: 414upx;">
-			<view class="padding-xl text-white">
-				<view class="padding-xs text-xxl text-bold">
-					钢铁之翼
+		<view :style="`height:${StatusBar}`"></view>
+		<!-- 头像区 -->
+		<view class="flex padding-top">
+			<view class="cu-avatar round xl margin-left-sm" style="background-image: url(https://ossweb-img.qq.com/images/lol/web201310/skin/big21002.jpg);">
+				<image class="vip" src="../../static/vip1.png" mode=""></image>
+			</view>
+			<view class="detail margin-left-sm">
+				<view>
+					<text class="text-lg">江晚吟</text>
 				</view>
-				<view class="padding-xs text-lg">
-					Only the guilty need fear me.
+				<view>
+					ID:123456789
+				</view>
+				<view>
+					<view class="cu-tag radius bg-yellow sm">LV36</view>
+				</view>
+			</view>
+			<view class="edit margin-right-sm">
+				<view class="cu-tag line-yellow radius">
+					编辑
 				</view>
 			</view>
 		</view>
-		<view class="user-info bg-black padding-tb-sm padding-lr solid-bottom-xl">
-			<view class="flex align-start">
-				<view class="cu-avatar xl round" style="background-image: url('https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg');"></view>
-				<view class="margin-left">
-					<view class="flex">
-						<view>
-							<view class="text-center">10</view>
-							<view class="text-center">粉丝数</view>
-						</view>
-						<view class="margin-left">
-							<view class="text-center">10</view>
-							<view class="text-center">关注数</view>
-						</view>
-					</view>
-					<view class="margin-top-xs text-xl text-orange" style="line-height: 40upx;">
-						<img src="../../static/diamond.svg" alt="" style="width: 28upx;height: 28upx;vertical-align: middle;">
-						<text>10,000,000,000,000</text>
-					</view>
+		<view class="show-self margin-top-sm padding-lr">
+			填写个人资料，展示自己的个性<br>
+		</view>
+		<!-- 个人咨询区 -->
+		<view class="flex margin-top">
+			<view class="num-box">
+				<view class="text-center text-xl">
+					78
 				</view>
-				<view class="btn">
-					<button class="cu-btn line-white"><text class="cuIcon-edit margin-right-xs"></text>编辑</button>
+				<view class="text-center text-sm">
+					关注
 				</view>
 			</view>
-			<view class="text-xl text-bold margin-top-sm">
-				@kevin
+			<view class="num-box solid-right">
+				<view class="text-center text-xl">
+					88
+				</view>
+				<view class="text-center text-sm">
+					粉丝
+				</view>
+			</view>
+			<view class="num-box margin-left">
+				<view class="text-center text-xl">
+					88888
+				</view>
+				<view class="text-center text-sm">
+					余额
+				</view>
+			</view>
+			<view class="btns margin-right flex align-end margin-bottom-xs">
+				<button class="cu-btn bg-yellow sm">充值</button>
+				<button class="cu-btn line-gray margin-left-sm sm">提现</button>
 			</view>
 		</view>
-		<!-- 导航 粘性 -->
-		<view class="fixed" v-if="isShowSticky" :style="`top:${navTopS}px;`">
-			<scroll-view scroll-x class="bg-black nav">
-				<view class="flex text-center">
-					<view class="cu-item flex-sub" :class="0==TabCur?'text-orange cur':''" @tap="tabSelect" :data-id="0">
-						动态
-					</view>
-					<view class="cu-item flex-sub" :class="1==TabCur?'text-orange cur':''" @tap="tabSelect" :data-id="1">
-						视频
+		<!-- 链接 -->
+		<view class="margin-lr-sm cu-list grid col-4 no-border radius margin-top">
+			<view class="cu-item">
+				<view>
+					<view class="cu-avatar radius" style="background-image: url(../../static/jryy.png);">
 					</view>
 				</view>
-			</scroll-view>
-		</view>
-		<!-- 导航正常 -->
-		<view id="nav-bar">
-			<scroll-view scroll-x class="bg-black nav">
-				<view class="flex text-center">
-					<view class="cu-item flex-sub" :class="0==TabCur?'text-orange cur':''" @tap="tabSelect" :data-id="0">
-						动态
-					</view>
-					<view class="cu-item flex-sub" :class="1==TabCur?'text-orange cur':''" @tap="tabSelect" :data-id="1">
-						视频
+				<text>佳人有约</text>
+			</view>
+			<view class="cu-item">
+				<view>
+					<view class="cu-avatar radius" style="background-image: url(../../static/tjyl.png);">
 					</view>
 				</view>
-			</scroll-view>
+				<text>推荐有礼</text>
+			</view>
+			<view class="cu-item">
+				<view>
+					<view class="cu-avatar radius" style="background-image: url(../../static/xfjl.png);">
+					</view>
+				</view>
+				<text>消费记录</text>
+			</view>
+			<view class="cu-item">
+				<view>
+					<view class="cu-avatar radius" style="background-image: url(../../static/czzx.png);">
+					</view>
+				</view>
+				<text>创作中心</text>
+			</view>
 		</view>
+		<!-- 视频板块 -->
+		<scroll-view scroll-x class="nav solid-bottom margin-top-sm">
+			<view class="flex text-center">
+				<view class="cu-item flex-sub" :class="index==TabCur?'text-yellow cur':''" v-for="(item,index) in Tabs" :key="index"
+				 @tap="tabSelect" :data-id="index">
+					{{item.label}}
+				</view>
+			</view>
+		</scroll-view>
 		<!-- 动态 -->
-		<view v-show="TabCur===0" class="swiper-item dynamic">
+		<view v-if="TabCur === 0">
+			<discoverBlock></discoverBlock>
+		</view>
+		<!-- 作品 -->
+		<view v-if="TabCur === 1" class="padding-lr-xs flex flex-wrap">
+			<videoBlock class="margin-left-xs margin-top-xs" v-for="i in 10" :icon="[66,66]" :time="60000"></videoBlock>
+		</view>
+		<!-- 最爱 -->
+		<view v-show="TabCur===2" class="swiper-item video padding-lr-sm">
 			<view class="my-concerned margin-top-xs">
 				<!-- 关注的列表 -->
 				<view class="cu-list menu-avatar">
-					<view class="cu-item" v-for="i in 20">
+					
+					<view class="cu-item">
 						<view class="cu-avatar  lg" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg);"></view>
 						<view class="content">
 							<view></view>
@@ -83,23 +126,22 @@
 							</view>
 						</view>
 					</view>
-				</view>
-			</view>
-		</view>
-		<!-- 视频 -->
-		<view v-show="TabCur===1" class="swiper-item video padding-lr-sm">
-			<view class="margin-top-sm video-item radius bg-black flex flex-direction" v-for="i in 10">
-				<view class="top" style="flex: 1;">
-					<video src="https://bd.hls.huya.com/src/1539218884-1539218884-6610894768165617664-3078561224-10057-A-0-1-imgplus_2000.m3u8?wsSecret=87359efe0d2db12980827ea0d363597e&wsTime=5f080851&u=0&seqid=15942755375895270&ctype=tars_mobile&fs=bgct&sphdcdn=al_7-tx_3-js_3-ws_7-bd_2-hw_2&sphdDC=huya&sphd=264_*&exsphd=264_2000,&t=103"></video>
-				</view>
-				<view class="bottom padding-lr-sm">
-					<view class="title text-cut">
-						站位符站位符站位符站位符站位符站位符站位符站位符站位符站位符站位符站位符站位符站位符站位符站位符站位符站位符站位符站位符
+					<view class="cu-item">
+						<view class="cu-avatar  lg" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg);"></view>
+						<view class="content">
+							<view></view>
+							<view class="text-gray text-sm flex text-overflow">
+								自己解锁的动态，超出两行的文字，省略号显示，占位符占位符占位符占位符占位符占位符占位符占位符
+							</view>
+						</view>
+						<!-- 动态类型 视频或者图文 -->
+						<view class="action">
+							<view class="text-xl">
+								<text class="text-white cuIcon-videofill"></text>
+							</view>
+						</view>
 					</view>
-					<view>
-						<text class="cuIcon-unlock"></text>1.2k
-						<text class="cuIcon-appreciatefill margin-left"></text>98%
-					</view>
+
 				</view>
 			</view>
 		</view>
@@ -107,76 +149,42 @@
 </template>
 
 <script>
+	import discoverBlock from '@/components/home/discover-block'
+	import videoBlock from "@/components/home/video-block"
 	export default {
+		components: {
+			discoverBlock,
+			videoBlock
+		},
 		data() {
 			return {
 				TabCur: 0,
-				navTopS: null,
-				navTop: null,
-				isShowSticky: false
-			};
-		},
-		onLoad() {
-			this.$nextTick(()=>{
-				this.setNavTop()
-			})
+				Tabs: [{
+					label: '解锁动态'
+				}, {
+					label: '解锁视频'
+				}, {
+					label: '最爱'
+				}]
+			}
 		},
 		methods: {
 			tabSelect(e) {
 				this.TabCur = e.currentTarget.dataset.id * 1;
-			},
-			ontabchange() {
-
-			},
-			// 设置nav到顶部的距离 (滚动条为0, 菜单顶部的数据加载完毕获取到的navTop数值是最精确的)
-			setNavTop() {
-				uni.getSystemInfo({
-					success: (res) => {
-						let view = uni.createSelectorQuery().select('#nav-bar');
-						view.boundingClientRect(data => {
-							console.log(res, data)
-							//#ifdef H5
-							this.navTopS = 44 //H5上悬浮距离多加一个头部
-							//#endif
-							//#ifdef APP-PLUS
-							this.navTopS = 0 //app上为正常距离
-							//#endif
-							this.navTop = data.top
-						}).exec();
-					}
-				})
-			},
-		},
-		onPageScroll(e) { //
-		console.log(e.scrollTop)
-			if (e.scrollTop >= this.navTop) {
-				this.isShowSticky = true // 显示悬浮菜单
-			} else {
-				this.isShowSticky = false // 隐藏悬浮菜单
 			}
-		},
+		}
 	}
 </script>
 
-<style lang="scss" scoped>
-	.user-info {
-		margin-top: -50upx;
-		border-radius: 30upx 30upx 0 0;
-
-		.btn {
-			margin-left: auto;
-		}
-	}
-
+<style scoped lang="scss">
 	.my-concerned {
 		.cu-list.menu-avatar>.cu-item {
-			background-color: #000;
+			background-color:transparent;
 
 			&::after {
 				border-color: #555;
 			}
 		}
-
 		.text-overflow {
 			line-height: 18px;
 			opacity: 1;
@@ -187,21 +195,71 @@
 			overflow: hidden;
 		}
 	}
-	.video{
-		.video-item{
-			height: 520upx;
-			overflow: hidden;
-			.bottom{
-				>view{
-					line-height: 64upx;
+
+	.vip {
+		width: 30upx;
+		height: 30upx;
+		position: absolute;
+		bottom: 0;
+		right: 0;
+	}
+
+	.num-box {
+		line-height: 40upx;
+		padding: 0 30upx;
+
+		&.solid-right {
+			&::after {
+				border-color: rgba($color: #fff, $alpha: .1);
+			}
+		}
+	}
+
+	.cu-list {
+		&.grid {
+			background-color: #303849;
+
+			&.no-border {
+				padding: 10upx;
+
+				>.cu-item {
+					padding: 20upx 0 10upx 0;
+				}
+			}
+
+			.cu-item {
+				.cu-avatar {
+					height: 82upx;
+					width: 82upx;
+				}
+
+				uni-text {
+					color: #fff;
+					font-size: 24upx;
 				}
 			}
 		}
 	}
 
-	.fixed {
-		position: fixed;
-		width: 100%;
-		z-index: 1;
+	.detail {
+		line-height: 1.6em;
+	}
+
+	.show-self {
+		line-height: 40upx;
+	}
+
+	.btns {
+		margin-left: auto;
+
+		.box {
+			margin-top: auto;
+		}
+	}
+
+	.edit {
+		margin-left: auto;
+		margin-top: auto;
+		margin-bottom: auto;
 	}
 </style>

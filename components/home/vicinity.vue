@@ -27,45 +27,7 @@
 			</view>
 		</scroll-view>
 		<view class="padding-lr margin-top">
-			<view class="cu-card dynamic">
-				<view class="cu-item shadow">
-					<view class="cu-list menu-avatar">
-						<view class="cu-item">
-							<view class="cu-avatar round lg" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg);"></view>
-							<view class="content flex-sub">
-								<view>凯尔</view>
-								<view class="text-gray text-sm flex justify-between">
-									2019年12月3日
-								</view>
-							</view>
-							<view>
-								<button class="bg-yellow cu-btn sm" @tap="modelShow = !modelShow">预约聊天</button>
-							</view>
-						</view>
-					</view>
-					<view class="text-content">
-						折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！
-					</view>
-					<view class="grid flex-sub padding-lr col-1">
-						<view class="bg-img only-img" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg);">
-						</view>
-					</view>
-					<view class="text-gray flex justify-around">
-						<view class="handler-btn text-center">
-							<text class="cuIcon-appreciatefill margin-right-xs"></text>
-							12345
-						</view>
-						<view class="handler-btn text-center">
-							<text class="cuIcon-videofill margin-right-xs"></text>
-							12345
-						</view>
-						<view class="handler-btn text-center">
-							<text class="cuIcon-unlock margin-right-xs"></text>
-							12345
-						</view>
-					</view>
-				</view>
-			</view>
+			<discoverBlock btnText="预约聊天" :list="[{url:'https://5b0988e595225.cdn.sohucs.com/images/20190715/cce33850ea84429db8fbcc6f4e0e14f4.jpeg'}]" @handlerTap="modelShow = true"></discoverBlock>
 		</view>
 		<!-- 预约表单 -->
 		<view class="cu-modal bottom-modal" :class="modelShow?'show':''">
@@ -150,7 +112,11 @@
 </template>
 
 <script>
+	import discoverBlock from '@/components/home/discover-block'
 	export default {
+		components:{
+			discoverBlock
+		},
 		data() {
 			return {
 				modelShow: false,
@@ -243,13 +209,7 @@
 		width: 100%;
 	}
 
-	.cu-card {
-		&.dynamic {
-			>.cu-item {
-				background-color: #303849;
-			}
-		}
-	}
+
 
 	.cu-list {
 		&.menu {
@@ -261,29 +221,6 @@
 					border-color: rgba(0, 0, 0, .3);
 				}
 			}
-		}
-
-		&.menu-avatar {
-			.cu-item {
-				background-color: #303849;
-
-				&::after {
-					border: 0;
-				}
-
-				.content.flex-sub {
-					width: calc(100% - 96upx - 180upx - 20upx);
-				}
-			}
-		}
-	}
-
-	.handler-btn {
-		width: calc(100% / 3);
-		line-height: 60upx;
-
-		[class*="cuIcon-"] {
-			font-size: 32upx;
 		}
 	}
 </style>

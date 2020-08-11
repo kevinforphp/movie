@@ -4,7 +4,7 @@
 		"style": {
 			"navigationStyle": "custom" //取消导航栏
 		}
-	},{
+	}, {
 		"path": "pages/home/search",
 		"style": {
 			"navigationStyle": "custom" //取消导航栏
@@ -12,8 +12,7 @@
 	}, {
 		"path": "pages/discover/index",
 		"style": {
-			"navigationBarTitleText": "发现",
-			"navigationBarBackgroundColor": "#242A37"
+			"navigationBarTitleText": "发现"
 		}
 	}, {
 		"path": "pages/messages/index",
@@ -23,12 +22,27 @@
 	}, {
 		"path": "pages/about/index",
 		"style": {
-			"navigationBarTitleText": "我的"
+			"navigationStyle": "custom" //取消导航栏
 		}
 	}, {
 		"path": "pages/messages/chat",
 		"style": {
 			"navigationBarTitleText": "@"
+		}
+	}, {
+		"path": "pages/messages/list",
+		"style": {
+			"navigationBarTitleText": "列表"
+		}
+	}, {
+		"path": "pages/discover/anchorDetail",
+		"style": {
+			"transparentTitle": "auto"
+		}
+	}, {
+		"path": "pages/about/creationCenter",
+		"style": {
+			"navigationBarTitleText": "创作中心"
 		}
 	}],
 	"tabBar": {
@@ -66,7 +80,7 @@
 	},
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
-		"navigationBarBackgroundColor": "#191919",
+		"navigationBarBackgroundColor": "#242A37",
 		"backgroundColor": "#FFFFFF",
 		"app-plus": { //下拉刷新样式
 			"pullToRefresh": {

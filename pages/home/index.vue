@@ -10,6 +10,7 @@
 				</view>
 			</scroll-view>
 		</view>
+		
 		<view class="content padding-bottom-sm">
 			<Vip v-if="TabCur === 0"></Vip>
 			<Recommend v-if="TabCur === 1"></Recommend>
