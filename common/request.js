@@ -21,7 +21,7 @@ function requestTask(url, data, method) {
 				uni.removeStorageSync('token')
 				//store.commit('SetUserInfo',{})
 				uni.reLaunch({
-					url: '/pages/login/login'
+					url: '/pages/login/index'
 				})
 				uni.showToast({
 					title: '重新登录',

@@ -15,6 +15,9 @@
 					// #endif
 				}
 			})
+			if (uni.getStorageSync('token')) {
+				this.$store.dispatch('getUserInfo') //获取用户详情
+			}
 		},
 		onShow: function() {
 			console.log('App Show');

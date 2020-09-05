@@ -12,18 +12,21 @@
 			</scroll-view>
 		</view>
 		<!-- 推荐 -->
-		<view v-if="TabCur === 0">
-			<discoverBlock v-for="i in 10" class="margin-top-xs" btnText="关注"></discoverBlock>
+		<view v-show="TabCur === 0">
+			<discoverBlock class="margin-top-xs" :name="item.publishNickname"  v-for="(item,key) in Tabs[TabCur].data" :key="key" :list="item.images?item.images.split(','):[]"
+			 :text="item.content" :type="item.type" :date="item.publishAt" :avatar="item.publishAvatar"></discoverBlock>
 		</view>
 		<!-- 已关注 -->
-		<view v-else="TabCur === 1">
-			<discoverBlock v-for="i in 10" class="margin-top-xs"></discoverBlock>
+		<view v-show="TabCur === 1">
+			<discoverBlock class="margin-top-xs" :name="item.publishNickname"  v-for="(item,key) in Tabs[TabCur].data" :key="key" :list="item.images?item.images.split(','):[]"
+			 :text="item.content" :type="item.type" :date="item.publishAt" :avatar="item.publishAvatar"></discoverBlock>
 		</view>
 	</view>
 </template>
 
 <script>
 	import discoverBlock from '@/components/home/discover-block'
+	import { MEDIA_NAEARBYACTIVITY} from "@/common/requestApi"
 	export default {
 		components:{
 			discoverBlock
@@ -32,22 +35,58 @@
 			return {
 				TabCur: 0,
 				Tabs: [{
-					label: '推荐'
+					label: '推荐',
+					data:[],
+					page:1,
+					hasMore:true
 				}, {
-					label: '关注'
-				}]
+					label: '关注',
+					data:[],
+					page:1,
+					hasMore:true
+				}],
+				keepLive:[]
 			};
 		},
 		onLoad() {
-			uni.getSystemInfo({
-				success: function(e) {
-					console.log(e)
-				}
-			})
+			this.getData()
+			this.keepLive.push(this.TabCur)//缓存
+		},
+		onReachBottom() { //触底加载更多
+			switch (this.TabCur) {
+				case 0:
+					if (!this.Tabs[this.TabCur].hasMore) return;
+					this.Tabs[this.TabCur].page++
+					this.getData()
+					break;
+				case 1:
+					if (!this.Tabs[this.TabCur].hasMore) return;
+					this.Tabs[this.TabCur].page++
+					this.getData()
+					break;
+				default:
+					break;
+			}
 		},
 		methods: {
 			tabSelect(e) {
 				this.TabCur = e.currentTarget.dataset.id * 1;
+				// 缓存操作
+				if(!this.keepLive.some(v=>v===this.TabCur)){//第一次打开
+					this.getData()
+					this.keepLive.push(this.TabCur)
+				}
+			},
+			getData(){
+				MEDIA_NAEARBYACTIVITY({
+					pageNo:this.Tabs[this.TabCur].page,
+					type:this.TabCur?3:2
+				}).then(res=>{
+					if(res.data.length < 20){
+						this.Tabs[this.TabCur].hasMore = false
+					}
+					this.Tabs[this.TabCur].data = this.Tabs[this.TabCur].data.concat(res.data)
+				})
 			}
 		},
 		computed: {

@@ -122,6 +122,16 @@ var tools = {
 		//#ifdef H5
 		window.open(url, '_blank')
 		//#endif
+	},
+	checkPower:function(backpage, backtype){ //检查是否登录
+		let token = uni.getStorageSync('token')
+		// console.log(token)
+		if (!token) {
+			uni.reLaunch({
+				url: '/pages/login/index?backPage=' + backpage + '&backType=' + backtype
+			});
+		}
+		return token
 	}
 }
 module.exports = {

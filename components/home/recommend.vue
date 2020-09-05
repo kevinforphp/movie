@@ -37,7 +37,9 @@
 			</view>
 		</view>
 		<view class="padding-lr-sm videos flex flex-wrap">
-			<videoItem class="margin-left-xs margin-top-xs" v-for="i in 4" :icon="[66,66]" :time="60000"></videoItem>
+			<block v-for="(item,key) in youlike">
+				<videoItem class="margin-left-xs margin-top-xs" v-if="key<=3" :key="key"  :icon="[66,item.views]" :cover="item.coverUri" :time="60000" :name="item.videoTitle" :author="item.publishAvatar"></videoItem>
+			</block>
 		</view>
 		<!-- 轮播 -->
 		<view class="cu-bar">
@@ -51,9 +53,10 @@
 		<view class="swiper-box margin-lr">
 			<swiper class="screen-swiper square-dot" :indicator-dots="true" :circular="true" :autoplay="true" interval="5000"
 			 duration="500" style="height: 280upx;">
-				<swiper-item v-for="(item,index) in swiperList" :key="index">
-					<image :src="item.url" mode="aspectFill" v-if="item.type=='image'"></image>
-					<video :src="item.url" autoplay loop muted :show-play-btn="false" :controls="false" objectFit="cover" v-if="item.type=='video'"></video>
+				<swiper-item v-for="(item,index) in hot" :key="index">
+					<image :src="item.coverUri" mode="aspectFill"></image>
+<!-- 					<image :src="item.url" mode="aspectFill" v-if="item.type=='image'"></image>
+					<video :src="item.url" autoplay loop muted :show-play-btn="false" :controls="false" objectFit="cover" v-if="item.type=='video'"></video> -->
 				</swiper-item>
 			</swiper>
 		</view>
@@ -68,7 +71,7 @@
 		</view>
 		<view class="padding-lr-sm">
 			<scroll-view class="scroll-view_H videos" scroll-x="true" style="height: 330upx">
-				<videoItem class="margin-left-xs" style="display: inline-block;" v-for="i in 4" :icon="[66,66]" :time="60000"></videoItem>
+				<videoItem class="margin-left-xs" style="display: inline-block;" v-for="(item,key) in featured" :key="key"  :icon="[66,item.views]"  :cover="item.coverUri" :time="60000" :author="item.publishAvatar" :name="item.videoTitle"></videoItem>
 			</scroll-view>
 		</view>
 		<!-- 新近主播 -->
@@ -82,7 +85,7 @@
 		</view>
 		<view class="padding-lr-sm">
 			<scroll-view class="scroll-view_H anchors" scroll-x="true" style="height: 420upx">
-				<videoItem class="anchor-item radius margin-left-xs" style="display: inline-block;" v-for="i in 4"></videoItem>
+				<videoItem class="anchor-item radius margin-left-xs" style="display: inline-block;" v-for="item in anchors" :key="item.id" :cover="item.avatar"></videoItem>
 			</scroll-view>
 		</view>
 	</view>
@@ -93,6 +96,24 @@
 	export default {
 		components: {
 			videoItem
+		},
+		props:{
+			youlike:{
+				type:Array,
+				default:()=>[]
+			},
+			hot:{
+				type:Array,
+				default:()=>[]
+			},
+			featured:{
+				type:Array,
+				default:()=>[]
+			},
+			anchors:{
+				type:Array,
+				default:()=>[]
+			}
 		},
 		data() {
 			return {
@@ -156,9 +177,11 @@
 		.anchor-item {
 			width: calc((100% - 45upx)/3);
 			height: 420upx;
+
 			.detail {
 				height: 90upx;
 			}
+
 			.img {
 				height: 330upx;
 			}

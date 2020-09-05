@@ -18,10 +18,19 @@
 					</view>
 				</view>
 				<view class="text-content">
-					折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！
+					{{text}}
 				</view>
 				<view :class="['grid padding-lr col-3',{'grid-square':list.length>1}] ">
-					<view v-for="(item,key) in list" :key="key" :class="['bg-img',{'only-img':list.length === 1}]" :style="`background-image:url('${item.url}');`"></view>
+					<!-- 图片 -->
+					<block v-if="type*1===2">
+<!-- 						<view v-for="(item,key) in list" :key="key" :class="['bg-img',{'only-img':list.length === 1}]">
+							<image :src="item" mode=""></image>
+						</view> -->
+						<view v-for="(item,key) in list" :key="key" :class="['bg-img',{'only-img':list.length === 1}]" @tap="ViewImage" :style="`background-image:url('${item}');`" :data-url="item"></view>
+					</block>
+					<block v-else>
+						<video :src="list[0]" class="only-img"></video>
+					</block>
 				</view>
 				<view class="text-gray flex justify-around">
 					<view class="handler-btn text-center">
@@ -45,45 +54,57 @@
 <script>
 	/*
 		动态模块
-	*/ 
+	*/
 	export default {
-		props:{
-			avatar:{
-				type:String,
-				default:'https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg'
+		props: {
+			avatar: {
+				type: String,
+				default: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg'
 			},
-			name:{
-				type:String,
-				default:'江晚吟'
+			name: {
+				type: String,
+				default: '江晚吟'
 			},
-			date:{
-				type:[Number,String],
-				default:'2019年12月3日'
+			type: {
+				type: [String, Number],
+				default: 2
 			},
-			text:{
-				type:String,
-				default:'动态默认站位符动态默认站位符动态默认站位符动态默认站位符动态默认站位符动态默认站位符'
+			date: {
+				type: [Number, String],
+				default: '2019年12月3日'
 			},
-			icons:{
-				type:Array,
-				default:()=>[666,666,666]//依次是点赞数，播放数，解锁数
+			text: {
+				type: String,
+				default: '动态默认站位符动态默认站位符动态默认站位符动态默认站位符动态默认站位符动态默认站位符'
 			},
-			list:{
-				type:Array,
-				default:()=>[]//媒体数组
+			icons: {
+				type: Array,
+				default: () => [666, 666, 666] //依次是点赞数，播放数，解锁数
 			},
-			btnText:{
-				type:String,
-				default:''
+			list: {
+				type: Array,
+				default: () => [] //媒体数组
 			},
-			handlerTap:{
-				type:Function
+			btnText: {
+				type: String,
+				default: ''
+			},
+			handlerTap: {
+				type: Function
 			}
 		},
 		data() {
 			return {
-				
+
 			};
+		},
+		methods:{
+			ViewImage(e) {
+				uni.previewImage({
+					urls: this.list,
+					current: e.currentTarget.dataset.url
+				});
+			},
 		}
 	}
 </script>
@@ -92,16 +113,17 @@
 	.menu-avatar {
 		.cu-item {
 			background-color: #303849;
-	
+
 			&::after {
 				border: 0;
 			}
-	
+
 			.content.flex-sub {
 				width: calc(100% - 96upx - 180upx - 20upx);
 			}
 		}
 	}
+
 	.handler-btn {
 		width: calc(100% / 3);
 		line-height: 60upx;
@@ -110,6 +132,7 @@
 			font-size: 32upx;
 		}
 	}
+
 	.cu-card {
 		&.dynamic {
 			>.cu-item {

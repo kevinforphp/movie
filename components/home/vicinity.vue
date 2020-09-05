@@ -17,17 +17,18 @@
 			</view>
 		</view>
 		<scroll-view scroll-x="true" style="height: 170upx" class="scroll-view_H">
-			<view class="anchor-item margin-left" v-for="i in 10">
+			<view class="anchor-item margin-left" v-for="item in anchors" :key="item.id">
 				<view class="dashed photo round line-yellow flex justify-center align-center">
-					<view class="cu-avatar lg round" style="background-image: url(https://ossweb-img.qq.com/images/lol/web201310/skin/big84000.jpg);border: 1upx solid #fff;"></view>
+					<view class="cu-avatar lg round" :style="`background-image: url(${item.avatar});border: 1upx solid #fff;`"></view>
 				</view>
 				<view class="name text-cut margin-top-xs text-sm">
-					这里是昵称这里是昵称这里是昵称这里是昵称
+					{{item.nickname}}
 				</view>
 			</view>
 		</scroll-view>
-		<view class="padding-lr margin-top">
-			<discoverBlock btnText="预约聊天" :list="[{url:'https://5b0988e595225.cdn.sohucs.com/images/20190715/cce33850ea84429db8fbcc6f4e0e14f4.jpeg'}]" @handlerTap="modelShow = true"></discoverBlock>
+		<view class="padding-lr margin-top discover-box">
+			<discoverBlock class="margin-top-sm discover" :id="`discover-${item.id}`" v-for="(item,key) in dynamic" :name="item.publishNickname" :avatar="item.publishAvatar" :key="key" :list="item.images?item.images.split(','):[]"
+			 :text="item.content" :type="item.type" :date="item.publishAt"></discoverBlock>
 		</view>
 		<!-- 预约表单 -->
 		<view class="cu-modal bottom-modal" :class="modelShow?'show':''">
@@ -113,9 +114,38 @@
 
 <script>
 	import discoverBlock from '@/components/home/discover-block'
+	let Observer = null;
 	export default {
-		components:{
+		components: {
 			discoverBlock
+		},
+		props: {
+			dynamic: {
+				type: Array,
+				default: () => []
+			},
+			anchors: {
+				type: Array,
+				default: () => []
+			}
+		},
+		watch: {
+			dynamic: function(val) {
+				if (val.length) {
+					this.$nextTick(()=>{
+						Observer.relativeToViewport({top: -45,bottom:-50,left:0,right:0}).observe('.discover', (res) => {
+							console.log(res);
+						})
+					})
+
+				}
+			}
+		},
+		created() {
+			Observer =  uni.createIntersectionObserver(this,{observeAll:true})
+		},
+		onUnload() {
+			Observer.disconnect()
 		},
 		data() {
 			return {
@@ -153,7 +183,7 @@
 		},
 		methods: {
 			pickChangeDate(e) {
-				this.curTime = 0//选择日期先把时间线清空
+				this.curTime = 0 //选择日期先把时间线清空
 				this.curDate = e.detail.value
 			},
 			pickChangeTime(e) {
@@ -165,10 +195,10 @@
 		},
 		computed: {
 			dates() {
-				let time = new Date(this.dateList[this.curDate].value).setHours(24,0,0,0), //截止时间
-					now = this.dateList[this.curDate].value + (this.curDate===0?3600000:0), //开始时间,如果是今天按当前时间的下一个小时开始计算，如果是其他天，就正常计算
+				let time = new Date(this.dateList[this.curDate].value).setHours(24, 0, 0, 0), //截止时间
+					now = this.dateList[this.curDate].value + (this.curDate === 0 ? 3600000 : 0), //开始时间,如果是今天按当前时间的下一个小时开始计算，如果是其他天，就正常计算
 					h = [];
-					console.log(time,now)
+				console.log(time, now)
 				while (time > now) {
 					time -= 3600000
 					h.push({

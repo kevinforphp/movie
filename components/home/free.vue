@@ -34,7 +34,9 @@
 			</view>
 		</view>
 		<view class="padding-lr-sm videos flex flex-wrap">
-			<videoItem class="margin-left-xs margin-top-xs" v-for="i in 10" :icon="[66,66]" :time="60000"></videoItem>
+			<block v-for="(item,key) in videos">
+				<videoItem class="margin-left-xs margin-top-xs" :key="key"  :icon="[66,item.views]" :cover="item.coverUri" :time="60000" :name="item.videoTitle"></videoItem>
+			</block>
 		</view>
 	</view>
 </template>
@@ -44,6 +46,16 @@
 	export default {
 		components: {
 			videoItem
+		},
+		props:{
+			videos:{
+				type:Array,
+				default:()=>[]
+			},
+			banner:{
+				type:Array,
+				default:()=>[]
+			}
 		},
 		data() {
 			return {
@@ -77,7 +89,7 @@
 					url: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big99008.jpg'
 				}]
 			};
-		}
+		},
 	}
 </script>
 

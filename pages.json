@@ -44,37 +44,65 @@
 		"style": {
 			"navigationBarTitleText": "创作中心"
 		}
-	}],
+	}    ,{
+            "path" : "pages/home/videoDetail",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/login/index",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/login/register",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/login/forget",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/about/settingCenter",
+            "style" : {
+				"navigationBarTitleText": "设置中心"
+			}
+        }
+        ,{
+            "path" : "pages/about/videoLists",
+            "style" : {
+				"navigationBarTitleText": "加载中.."
+			}
+        }
+    ],
 	"tabBar": {
 		"color": "#4E586E",
 		"selectedColor": "#fff",
 		"backgroundColor": "#303849",
 		"borderStyle": "black",
 		"blurEffect": "light",
-		"spacing": "1px",
+		"spacing": "10px",
 		"list": [{
 				"pagePath": "pages/home/index",
-				"text": "首页"
-				// "iconPath": "static/home.svg",
-				// "selectedIconPath": "static/home_selected.svg"
+				"text": "首页",
+				"iconPath": "static/home.png",
+				"selectedIconPath": "static/home-select.png"
 			},
 			{
 				"pagePath": "pages/discover/index",
-				"text": "发现"
-				// "iconPath": "static/home.svg",
-				// "selectedIconPath": "static/home_selected.svg"
+				"text": "发现",
+				"iconPath": "static/discover.png",
+				"selectedIconPath": "static/discover-select.png"
 			},
 			{
 				"pagePath": "pages/messages/index",
-				"text": "消息"
-				// "iconPath": "static/home.svg",
-				// "selectedIconPath": "static/home_selected.svg"
+				"text": "消息",
+				"iconPath": "static/message.png",
+				"selectedIconPath": "static/message-select.png"
 			},
 			{
 				"pagePath": "pages/about/index",
-				"text": "我的"
-				// "iconPath": "static/home.svg",
-				// "selectedIconPath": "static/home_selected.svg"
+				"text": "我的",
+				"iconPath": "static/about.png",
+				"selectedIconPath": "static/about-select.png"
 			}
 		]
 	},
