@@ -123,12 +123,15 @@ var tools = {
 		window.open(url, '_blank')
 		//#endif
 	},
-	checkPower:function(backpage, backtype){ //检查是否登录
+	checkPower:function(backtype){ //检查是否登录
 		let token = uni.getStorageSync('token')
 		// console.log(token)
 		if (!token) {
+			let pages = getCurrentPages();
+			let page = pages[pages.length - 1];
+			let url = page.$route.fullPath;
 			uni.reLaunch({
-				url: '/pages/login/index?backPage=' + backpage + '&backType=' + backtype
+				url: '/pages/login/index?backPage=' + url + '&backType=' + backtype
 			});
 		}
 		return token

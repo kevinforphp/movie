@@ -17,7 +17,7 @@
 				<view class="cu-list menu-avatar">
 					<view class="cu-item">
 						<view class="cu-avatar round lg" style="background-image: url(https://ossweb-img.qq.com/images/lol/web201310/skin/big81005.jpg);">
-						
+
 						</view>
 						<view class="content">
 							<view class="text-grey">系统消息
@@ -93,7 +93,7 @@
 			};
 		},
 		onLoad() {
-
+			this.checkPower(0) //传入参数，使登录后传回
 		},
 		methods: {
 			tabSelect(e) {
@@ -117,9 +117,11 @@
 	.header {
 		background-color: #242A37
 	}
+
 	.messages {
 		.cu-list.menu-avatar>.cu-item {
 			background-color: #303849;
+
 			&::after {
 				border-color: #242A37;
 			}

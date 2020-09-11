@@ -5,8 +5,8 @@
 			<view class="cu-item shadow">
 				<view class="cu-list menu-avatar">
 					<view class="cu-item">
-						<view class="cu-avatar round lg" :style="`background-image:url(${avatar});`"></view>
-						<view class="content flex-sub">
+						<view @tap="$emit('goDetail')" class="cu-avatar round lg" :style="`background-image:url(${avatar});`"></view>
+						<view class="content flex-sub" @tap="$emit('goDetail')">
 							<view>{{name}}</view>
 							<view class="text-gray text-sm flex justify-between">
 								{{date}}
@@ -20,19 +20,20 @@
 				<view class="text-content">
 					{{text}}
 				</view>
-				<view :class="['grid padding-lr col-3',{'grid-square':list.length>1}] ">
+				<view :class="['grid padding-lr padding-bottom-sm pad col-3',{'grid-square':list.length>1}] ">
 					<!-- 图片 -->
 					<block v-if="type*1===2">
-<!-- 						<view v-for="(item,key) in list" :key="key" :class="['bg-img',{'only-img':list.length === 1}]">
+						<!-- 						<view v-for="(item,key) in list" :key="key" :class="['bg-img',{'only-img':list.length === 1}]">
 							<image :src="item" mode=""></image>
 						</view> -->
-						<view v-for="(item,key) in list" :key="key" :class="['bg-img',{'only-img':list.length === 1}]" @tap="ViewImage" :style="`background-image:url('${item}');`" :data-url="item"></view>
+						<view v-for="(item,key) in list" :key="key" :class="['bg-img',{'only-img':list.length === 1}]" @tap="ViewImage"
+						 :style="`background-image:url('${item}');`" :data-url="item"></view>
 					</block>
 					<block v-else>
 						<video :src="list[0]" class="only-img"></video>
 					</block>
 				</view>
-				<view class="text-gray flex justify-around">
+				<view v-if="icons.length" class="text-gray flex justify-around">
 					<view class="handler-btn text-center">
 						<text class="cuIcon-appreciatefill margin-right-xs"></text>
 						{{icons[0]}}
@@ -79,7 +80,7 @@
 			},
 			icons: {
 				type: Array,
-				default: () => [666, 666, 666] //依次是点赞数，播放数，解锁数
+				default: () => [] //依次是点赞数，播放数，解锁数
 			},
 			list: {
 				type: Array,
@@ -91,6 +92,9 @@
 			},
 			handlerTap: {
 				type: Function
+			},
+			goDetail: {
+				type: Function
 			}
 		},
 		data() {
@@ -98,7 +102,7 @@
 
 			};
 		},
-		methods:{
+		methods: {
 			ViewImage(e) {
 				uni.previewImage({
 					urls: this.list,

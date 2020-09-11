@@ -50,6 +50,9 @@
 			SwitchSex(e){
 				this.skin = e.detail.value
 			}
+		},
+		onLoad() {
+			this.checkPower(1)
 		}
 	}
 </script>

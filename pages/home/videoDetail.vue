@@ -62,6 +62,9 @@
 </template>
 
 <script>
+	import {
+		USER_GETMEDIADETAIL
+	} from "@/common/requestApi"
 	export default {
 		data() {
 			return {
@@ -70,12 +73,29 @@
 					label: '更多他的视频'
 				}, {
 					label: '推荐视频'
-				}]
+				}],
+				id: null
 			};
 		},
 		methods: {
 			tabSelect(e) {
 				this.TabCur = e.currentTarget.dataset.id * 1;
+			},
+			getDetail() {
+				USER_GETMEDIADETAIL({
+					id: this.id,
+					mediaType: 1
+				}).then(res => {
+					console.log(res)
+				})
+			}
+		},
+		onLoad(options) {
+			if (options.id) {
+				this.id = options.id * 1
+				this.getDetail()
+			} else {
+				return
 			}
 		},
 		computed: {

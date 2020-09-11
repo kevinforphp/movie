@@ -11,9 +11,9 @@
 		</cu-custom>
 		<view class="cu-list menu-avatar">
 			<view class="cu-item">
-				<view class="cu-avatar round xl" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg); border:1upx solid #fff;"></view>
+				<view class="cu-avatar round xl" :style="`background-image:url(${$store.state.UserInfo.avatar}); border:1upx solid #fff;`"></view>
 				<view class="content">
-					<view class="text-white" style="font-size: 1.5em;">旗木卡卡西</view>
+					<view class="text-white" style="font-size: 1.5em;">{{$store.state.UserInfo.nickname}}</view>
 					<view class="text-gray text-sm flex margin-top-xs">
 						<view class="text-cut" style="font-size: 1.3em;">
 							UID: <text class="text-yellow"> 258000065</text>
@@ -133,6 +133,9 @@
 					return;
 				}
 			}
+		},
+		onLoad() {
+			this.checkPower(0) //传入参数，使登录后传回
 		}
 	}
 </script>

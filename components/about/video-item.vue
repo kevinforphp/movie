@@ -1,25 +1,23 @@
 <template>
-	<view>
-		<view class="video-item flex padding-sm solid-top">
-			<view class="img radius">
-				<image src="https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg" mode=""></image>
+	<view class="video-item flex padding-sm solid-top">
+		<view class="img radius">
+			<image :src="cover" mode=""></image>
+		</view>
+		<view class="margin-left-sm detail">
+			<view class="title">
+				{{name}}
 			</view>
-			<view class="margin-left-sm detail">
-				<view class="title">
-					June Liu 刘玥 & 印度大奶妹Latika Double blowjob cum in mouth双女口交口爆
-				</view>
-				<view class="anchor margin-top-sm">
-					<view class="cu-avatar round sm" style="background-image:url(https://ossweb-img.qq.com/images/lol/web201310/skin/big10001.jpg); border:1upx solid #fff;"></view>
-					<text class="text-gray margin-left-sm">一个小萌新</text>
-				</view>
-				<view class="icons margin-top-sm text-gray">
-					<text class="cuIcon-unlock"></text>
-					<text>144</text>
-					<text class="cuIcon-likefill margin-left-sm"></text>
-					<text>144</text>
-					<text class="cuIcon-appreciatefill margin-left-sm"></text>
-					<text>144</text>
-				</view>
+			<view class="anchor margin-top-sm">
+				<view class="cu-avatar round sm" :style="`background-image:url(${author}); border:1upx solid #fff;`"></view>
+				<text class="text-gray margin-left-sm">{{authorName}}</text>
+			</view>
+			<view class="icons margin-top-sm text-gray">
+				<text class="cuIcon-unlock"></text>
+				<text>{{icon[0]}}</text>
+				<text class="cuIcon-likefill margin-left-sm"></text>
+				<text>{{icon[1]}}</text>
+				<text class="cuIcon-appreciatefill margin-left-sm"></text>
+				<text>{{icon[2]}}</text>
 			</view>
 		</view>
 	</view>
@@ -27,7 +25,33 @@
 
 <script>
 	export default {
-		name:'video-item'
+		name:'video-item',
+		props:{
+			time: {
+				type: Number,
+				default: 0
+			},
+			cover: {
+				type: String,
+				default: 'https://ossweb-img.qq.com/images/lol/web201310/skin/big84000.jpg',
+			},
+			author: {
+				type: String,
+				default: "https://ossweb-img.qq.com/images/lol/web201310/skin/big84000.jpg"
+			},
+			authorName:{
+				type:String,
+				default:'一个小萌新'
+			},
+			name: {
+				type: String,
+				default: '视频名称视频名称视频名称视频名称视频名称'
+			},
+			icon: { //第一个是点赞人数，第二个解锁人数
+				type: Array,
+				default: () => []
+			}
+		}
 	}
 </script>
 

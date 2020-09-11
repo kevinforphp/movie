@@ -12,7 +12,8 @@
 	}, {
 		"path": "pages/discover/index",
 		"style": {
-			"navigationBarTitleText": "发现"
+			"navigationBarTitleText": "发现",
+			"enablePullDownRefresh": true
 		}
 	}, {
 		"path": "pages/messages/index",
@@ -69,7 +70,8 @@
         ,{
             "path" : "pages/about/videoLists",
             "style" : {
-				"navigationBarTitleText": "加载中.."
+				"navigationBarTitleText": "加载中..",
+				"enablePullDownRefresh": true
 			}
         }
     ],

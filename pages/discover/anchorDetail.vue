@@ -4,12 +4,12 @@
 		</view>
 		<!-- 视频 动态 喜欢  头像 -->
 		<view class="flex detail align-center">
-			<view class="cu-avatar round margin-left" style="background-image: url(https://ossweb-img.qq.com/images/lol/web201310/skin/big21002.jpg);height: 150upx;width: 150upx;border: 2upx solid #fff;">
-				<image class="vip" src="../../static/vip1.png" mode=""></image>
+			<view class="cu-avatar round margin-left" :style="`background-image: url(${detail.avatar});height: 150upx;width: 150upx;border: 2upx solid #fff;`">
+				<!-- <image class="vip" src="../../static/vip1.png" mode=""></image> -->
 			</view>
 			<view class="num-box" style="margin-left: 50upx;">
 				<view class="text-center text-xl">
-					50
+					{{detail.activityCount}}
 				</view>
 				<view class="text-center text-sm">
 					动态
@@ -17,7 +17,7 @@
 			</view>
 			<view class="num-box margin-left">
 				<view class="text-center text-xl">
-					88
+					{{detail.videoCount}}
 				</view>
 				<view class="text-center text-sm">
 					视频
@@ -25,7 +25,7 @@
 			</view>
 			<view class="num-box margin-left">
 				<view class="text-center text-xl">
-					500
+					{{detail.followCount}}
 				</view>
 				<view class="text-center text-sm">
 					喜欢
@@ -34,15 +34,17 @@
 		</view>
 		<!-- 关注 -->
 		<view>
-			<view class="handler-btn bg-yellow text-center">关注</view>
+			<view v-if="!detail.isFollow" class="handler-btn bg-yellow text-center" @tap="toFollow">关注</view>
+			<view v-else class="handler-btn bg-gray text-center">已关注</view>
 		</view>
 		<!-- 姓名描述 -->
 		<view class="padding-lr">
 			<view>
-				<text class="text-lg">@江晚吟</text> <view class="cu-tag radius bg-yellow sm margin-left-xs">LV36</view>
+				<text class="text-lg">@{{detail.nickname}}</text>
+				<!-- <view class="cu-tag radius bg-yellow sm margin-left-xs">LV36</view> -->
 			</view>
 			<view class="show-self margin-top-xs">
-				填写个人资料，展示自己的个性<br>
+				{{detail.selfDescription}}
 			</view>
 		</view>
 		<!-- 视频板块 -->
@@ -56,41 +58,121 @@
 		</scroll-view>
 		<!-- 动态 -->
 		<view v-if="TabCur === 0">
-			<discoverBlock v-for="i in 10" class="margin-top-xs"></discoverBlock>
+			<discoverBlock class="margin-top-xs" :name="item.publishNickname" v-for="(item,key) in Tabs[TabCur].data" :key="key"
+			 :list="item.images?item.images.split(','):[]" :text="item.content" :type="item.type" :date="item.publishAt" :avatar="item.publishAvatar"></discoverBlock>
 		</view>
 		<!-- 作品 -->
 		<view v-if="TabCur === 1" class="padding-lr-xs flex flex-wrap">
-			<videoBlock class="margin-left-xs margin-top-xs" v-for="i in 10" :icon="[66,66]" :time="60000"></videoBlock>
+			<view  v-for="(item,key) in Tabs[TabCur].data" :key="key" @tap="navTo('/pages/home/videoDetail?id='+id)">
+				<videoItem  :cover="item.coverUri" :author="item.publishAvatar"  :authorName="item.publishNickname" :name="item.videoTitle" :icon="[item.unlocks,99,99]" :time="60000"></videoItem>
+			</view>
 		</view>
 	</view>
 </template>
 
 <script>
 	import discoverBlock from '@/components/home/discover-block'
-	import videoBlock from "@/components/home/video-block"
+	import videoItem from "@/components/about/video-item"
+	import {
+		USER_ANCHORINFO,
+		USER_FOLLOW,
+		USER_GETANCHORMEDIALIST
+	} from "@/common/requestApi"
 	export default {
 		components: {
 			discoverBlock,
-			videoBlock
+			videoItem
 		},
 		data() {
 			return {
 				TabCur: 0,
+				id: null,
 				Tabs: [{
-					label: '动态'
+					label: '动态',
+					data: [],
+					page: 1,
+					hasMore: true
 				}, {
-					label: '作品'
-				}]
+					label: '作品',
+					data: [],
+					page: 1,
+					hasMore: true
+				}],
+				detail: {},
+				keepLive: []
 			}
 		},
-		onLoad() {
-			uni.setNavigationBarTitle({
-				title:'@江晚吟'
-			})
+		onLoad(options) {
+			console.log(options)
+			if (options.id) {
+				this.id = options.id * 1
+				this.getDetail()
+				this.getData()
+				this.keepLive.push(this.TabCur) //缓存
+			} else {
+				return
+			}
 		},
 		methods: {
 			tabSelect(e) {
 				this.TabCur = e.currentTarget.dataset.id * 1;
+				if (!this.keepLive.some(v => v === this.TabCur)) { //第一次打开
+					this.getData()
+					this.keepLive.push(this.TabCur)
+				}
+			},
+			onReachBottom() { //触底加载更多
+				if (!this.Tabs[this.TabCur].hasMore) return;
+				this.Tabs[this.TabCur].page++
+				this.getData()
+			},
+			getData() {
+				USER_GETANCHORMEDIALIST({
+					anchorId: this.id,
+					pageNo: this.Tabs[this.TabCur].page,
+					mediaType: this.TabCur ? 1 : 2
+				}).then(res => {
+					if (res.status) {
+						console.log(res.data)
+						if (res.data.length < 20) {
+							this.Tabs[this.TabCur].hasMore = false
+						}
+						this.Tabs[this.TabCur].data = this.Tabs[this.TabCur].data.concat(res.data)
+					}
+				})
+			},
+			getDetail() {
+				USER_ANCHORINFO({
+					anchorId: this.id
+				}).then(res => {
+					if (res.status) {
+						this.detail = res.data
+						uni.setNavigationBarTitle({
+							title: '@' + res.data.nickname
+						})
+					} else {
+						uni.showToast({
+							title: res.msg,
+							icon: 'none',
+							mask: true
+						})
+					}
+				})
+			},
+			toFollow() {
+				USER_FOLLOW({
+					anchorId: this.id
+				}).then(res => {
+					if (res.status) {
+
+					} else {
+						uni.showToast({
+							title: res.msg,
+							icon: 'none',
+							mask: true
+						})
+					}
+				})
 			}
 		}
 	}
@@ -111,6 +193,7 @@
 		.num-box {
 			line-height: 40upx;
 			padding: 0 30upx;
+
 			&.solid-right {
 				&::after {
 					border-color: rgba($color: #fff, $alpha: .1);
@@ -118,12 +201,14 @@
 			}
 		}
 	}
-	.handler-btn{
-		width:240upx;
+
+	.handler-btn {
+		width: 240upx;
 		line-height: 60upx;
 		margin-left: 260upx;
 		border-radius: 6upx;
-		&.disabled{
+
+		&.disabled {
 			background-color: #303849;
 			color: #fff;
 		}
